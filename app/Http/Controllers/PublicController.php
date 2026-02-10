@@ -24,7 +24,11 @@ class PublicController extends Controller
             'content' => 'required|string',
         ]);
 
-        Post::create($data);
+       Post::create([
+    'title'   => $data['title'],
+    'content' => $data['content'],
+    'user_id' => 1, 
+]);
 
         return redirect()->route('posts.index')
             ->with('success', 'Articolo creato con successo.');
