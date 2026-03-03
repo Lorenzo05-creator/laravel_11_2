@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Post;
@@ -24,11 +25,8 @@ class PublicController extends Controller
             'content' => 'required|string',
         ]);
 
-       Post::create([
-    'title'   => $data['title'],
-    'content' => $data['content'],
-    'user_id' => 1, 
-]);
+       
+        auth()->user()->posts()->create($data);
 
         return redirect()->route('posts.index')
             ->with('success', 'Articolo creato con successo.');
