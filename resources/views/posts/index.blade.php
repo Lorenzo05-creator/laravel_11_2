@@ -1,19 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Tutti gli articoli')
-
 @section('content')
-    <h1 class="mb-4">Tutti gli articoli</h1>
+    <h1>Lista Post</h1>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    @foreach ($posts as $post)
+        <div>
+            <h2>{{ $post->title }}</h2>
+            <p>{{ $post->body }}</p>
 
-    @forelse ($posts as $post)
-        <x-post-card :post="$post" />
-    @empty
-        <p>Non ci sono articoli.</p>
-    @endforelse
+            <a href="{{ route('posts.show', $post) }}">Vedi</a>
 
-    {{ $posts->links() }}
+            @auth
+                <a href="{{ route('posts.edit', $post) }}">Modifica</a>
+
+                <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Elimina</button>
+                </form>
+            @endauth
+        </div>
+        <hr>
+    @endforeach
 @endsection
