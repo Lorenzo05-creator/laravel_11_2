@@ -7,8 +7,11 @@ Route::get('/', function () {
     return redirect()->route('posts.index');
 })->name('home');
 
+
+Route::get('/posts', [PublicController::class, 'index'])->name('posts.index');
+
+
 Route::middleware('auth')->group(function () {
-    Route::get('/posts', [PublicController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PublicController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PublicController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}', [PublicController::class, 'show'])->name('posts.show');
