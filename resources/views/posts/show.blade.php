@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $post->title }}</h1>
-    <p>{{ $post->body }}</p>
+<div class="card shadow">
+    <div class="card-body">
+        <h1 class="card-title">{{ $post->title }}</h1>
+        <p class="card-text mt-3">{{ $post->body }}</p>
 
-    <a href="{{ route('posts.index') }}">Torna indietro</a>
+        <a href="{{ route('posts.index') }}" class="btn btn-secondary mt-3">
+            Torna indietro
+        </a>
+    </div>
+</div>
 @endsection
